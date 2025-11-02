@@ -195,6 +195,11 @@ matrix = rgbmatrix.RGBMatrix(
 
 display = framebufferio.FramebufferDisplay(matrix,auto_refresh=False, rotation=90) # Rotate 90 degrees so PCB pokes out of the top
 display.brightness = 1 # Current implementation is 0 = off anything non-zero value = full brightness
+# don't display code.py on the RGBPanel display. Google thinks it's not possible to squelch this but
+# we can delete the screen right after the driver sends the unwanted output.
+main_group = displayio.Group()
+display.root_group = main_group 
+display.refresh()
 
 # Main "Full color" bitmap we use for drawing onto
 bitmap = displayio.Bitmap(WIDTH,HEIGHT,65535)
