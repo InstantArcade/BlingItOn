@@ -56,7 +56,7 @@ class GridVis:
         self.visHeight = HEIGHT
         self.visWidthHalf = WIDTH//2
         self.visHeighthalf = HEIGHT//2
-        print( f"ConcentricVis initialized - Width {WIDTH}, Height {HEIGHT}")
+        print( f"GridVis initialized - Width {WIDTH}, Height {HEIGHT}")
 
     all_grids = []
 
