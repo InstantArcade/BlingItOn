@@ -1,0 +1,1 @@
+rotating triangle (on z axis) - need a rot speed too
