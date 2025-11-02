@@ -33,17 +33,26 @@ import socketpool
 import adafruit_requests
 
 # The visualization imports
-import ConcentricVis
-import ShapesVis
 import BlinkenVis
+import ConcentricVis
+import CubeVis
+import GravBallVis
 import GridVis
-import Eightball
+import RainbowVis
+import ShapesVis
+import SpriteVis
+import StarVis
+import WaveVis
+import WolframVis
 
 PI = 3.1415926535
 PIx2 = PI*2.0
 
 WIDTH = 64
 HEIGHT = 64
+
+# Change demo every 3 seconds
+demo_length_sec = 3
 
 # Realtime clock
 local_rtc = rtc.RTC()
@@ -63,7 +72,7 @@ def center_text( text_area ):
     print(f"centering text in bounding box {tabb}")
     text_area.x = 32-(max(tabb[0],tabb[2])-min(tabb[0],tabb[2]))//2
     half_height = (max(tabb[1],tabb[3])-min(tabb[1],tabb[3]))//2
-    text_area.y = 30+half_height//2 # Might need to change this offset with different fonts
+    text_area.y = 5+half_height//2 # Might need to change this offset with different fonts
     print(f"New X {text_area.x}, Y {text_area.y}")
     return text_area
 
@@ -195,11 +204,11 @@ matrix = rgbmatrix.RGBMatrix(
 
 display = framebufferio.FramebufferDisplay(matrix,auto_refresh=False, rotation=90) # Rotate 90 degrees so PCB pokes out of the top
 display.brightness = 1 # Current implementation is 0 = off anything non-zero value = full brightness
-# don't display code.py on the RGBPanel display. Google thinks it's not possible to squelch this but
-# we can delete the screen right after the driver sends the unwanted output.
+# don't display code.py on the RGBPanel display
 main_group = displayio.Group()
 display.root_group = main_group 
-display.refresh()
+display.refresh() 
+
 
 # Main "Full color" bitmap we use for drawing onto
 bitmap = displayio.Bitmap(WIDTH,HEIGHT,65535)
@@ -249,14 +258,27 @@ display.refresh()
 fps_sum = 0
 fps_samples = 0
 fps_start = -1
+time_ticks = 0
 last_print_time = 0
 last_fps = 0
 
+vis_ctr = 0
+
 # Pick the visualization(s)
-vis = BlinkenVis.BlinkenVis(WIDTH,HEIGHT) # Blinkenlights
-#vis = ShapesVis.ShapesVis(WIDTH,HEIGHT) # Groovy Circle snake
-#vis = ConcentricVis.ConcentricVis(WIDTH,HEIGHT) # Concentric circles that move around
-#vis = GridVis.GridVis(WIDTH,HEIGHT) # Depth grid that moves based on acellerometer
+vis_list = [
+    BlinkenVis.BlinkenVis(WIDTH,HEIGHT), # Blinkenlights suarees
+    ConcentricVis.ConcentricVis(WIDTH,HEIGHT),  # Concentric circles that move around
+    CubeVis.CubeVis(WIDTH,HEIGHT),  # rotating 3D bob
+    GravBallVis.GravBallVis(WIDTH,HEIGHT), 
+    GridVis.GridVis(WIDTH,HEIGHT),  # Depth grid that moves based on accelerometer
+    RainbowVis.RainbowVis(WIDTH,HEIGHT), # moving color lines 
+    ShapesVis.ShapesVis(WIDTH,HEIGHT),  # moving bubbles that change size
+    #SpriteVis.SpriteVis(WIDTH,HEIGHT), # more complex demo that needs some integration
+    StarVis.StarVis(WIDTH,HEIGHT), # starfield
+    #WaveVis.WaveVis(WIDTH,HEIGHT), # non working half green screen FIXME
+    #WolframVis.WolframVis(WIDTH,HEIGHT), 
+]
+vis = vis_list[vis_ctr]
 vis2 = None
 
 vis.reset() # IMPORTANT!
@@ -266,10 +288,11 @@ if vis2: # Reset the 2nd visualization if it has been declared
     vis2.reset() # IMPORTANT!
 
 # Special visualization initialization
-# if isinstance(vis, SpriteVis.SpriteVis):
+if isinstance(vis, SpriteVis.SpriteVis):
     # In this case the visualization loaded a bitmap and we need to copy the loaded palette back to our sprite layer
-#     vis.source_palette.make_transparent(0)
-#     tg2.pixel_shader = vis.source_palette
+     vis.source_palette.make_transparent(0)
+     tg2.pixel_shader = vis.source_palette
+     print("Loaded palette for SpriteVis")
 
 ang = 0 # for text movement
 
@@ -330,9 +353,10 @@ show_time = False
 
 if show_time:
     # Set the text on the text layer to the current time
-    text_area.text = f"{local_rtc.datetime.tm_hour}:{local_rtc.datetime.tm_min:02}"
+    text_area.text = "* " + f"{local_rtc.datetime.tm_hour}:{local_rtc.datetime.tm_min:02} *\n\n" + "> 2025 <\nHACKADAY\nSUPERCON"
 else:
-    text_area.text = "HACKADAY"
+    # this hangs 1-2sec, very slow lib?
+    text_area.text = "* Marc *\n MERLIN \n\n> 2025 <\nHACKADAY\nSUPERCON"
 #     text_area.text = "SUPERCON"
     
 center_text(text_area)
@@ -385,10 +409,10 @@ while True:
     last_up = up_button.value
 
     # Update the visualization(s)
-#     if isinstance(vis, SpriteVis.SpriteVis): # special render step
-#         vis.update( delta, bitmap, palettized_bitmap, acc )
-#     else:
-    vis.update( delta, bitmap, acc )
+    if isinstance(vis, SpriteVis.SpriteVis): # special render step
+        vis.update( delta, bitmap, palettized_bitmap, acc )
+    else:
+        vis.update( delta, bitmap, acc )
         
     if vis2:
 #         if isinstance(vis2, SpriteVis.SpriteVis): # special render step
@@ -397,15 +421,15 @@ while True:
         vis2.update( delta, bitmap, acc )
         
 # Moving text effect
-#     text_area.y = int(32 + math.sin(ang)* 10)
-#     ang += 0.11
-#     if ang > PIx2:
-#         ang -= PIx2
+    text_area.y = int(14 + math.sin(ang)* 10)
+    ang += 0.11
+    if ang > PIx2:
+        ang -= PIx2
 
     # Check to see if we need to update the time
     if local_rtc.datetime.tm_min != last_min and show_time:
-        text_area.text = f"{local_rtc.datetime.tm_hour}:{local_rtc.datetime.tm_min:02}"
-        text_area.x = 31-text_area.width//2 # re-center
+        text_area.text = "* " + f"{local_rtc.datetime.tm_hour}:{local_rtc.datetime.tm_min:02} *\n\n" + "> 2025 <\nHACKADAY\nSUPERCON"
+        text_area.x = 32-text_area.width//2 # re-center
         #save current minute for update
         last_min = local_rtc.datetime.tm_min
 
@@ -413,6 +437,15 @@ while True:
 
     # If more than a second has elapsed, show the Frames Per Second and reset the counters
     if ticks - last_print_time > 1000:
+        time_ticks += 1
+        # change demo very few seconds
+        if time_ticks % demo_length_sec == 0:
+            vis_ctr += 1
+            demo = vis_ctr % len(vis_list)
+            print("Switching to demo %d" % demo)
+            vis = vis_list[demo]
+            vis.reset() # IMPORTANT!
+
 #         print( f"Average FPS {fps_sum} - delta {delta} # ADC {acc}`")
         color = 0xffff
         last_fps = fps_sum

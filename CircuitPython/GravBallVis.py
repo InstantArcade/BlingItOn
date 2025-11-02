@@ -79,7 +79,7 @@ class GravBallVis:
     the_balls = []
     
     def reset( self ):
-        print( "GravBallVis resetting" )
+        #print( "GravBallVis resetting" )
         self.the_balls.clear()
         for i in range( self.MAX_BALLS ):
             gb = GravBall()
