@@ -2,7 +2,7 @@ from random import randrange
 import math
 
 
-class Wolfram:
+class WolframVis:
     """ A visulaization of Wolfram rules """
 
     cool_rules = [30,129,135,22]
@@ -96,4 +96,4 @@ class Wolfram:
 
         # restore line 0
         for x in range( self.visWidth ):
-            self.current_bits[x] = saved_line[x]
+

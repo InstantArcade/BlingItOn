@@ -80,6 +80,7 @@ class WaveVis:
             for i in range(0,64):
                 self.wave_levels[i] *= 0.9
     
+        # FIXME, this looks unfinished and only displays 32 lines of the same color
         color = self.hsv.getHSV(130)
         for x in range(0,64):
 #             bitmaptools.draw_line(bitmap,x,32,x,63,0xFF00)

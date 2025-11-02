@@ -276,7 +276,7 @@ vis_list = [
     #SpriteVis.SpriteVis(WIDTH,HEIGHT), # more complex demo that needs some integration
     StarVis.StarVis(WIDTH,HEIGHT), # starfield
     #WaveVis.WaveVis(WIDTH,HEIGHT), # non working half green screen FIXME
-    #WolframVis.WolframVis(WIDTH,HEIGHT), 
+    WolframVis.WolframVis(WIDTH,HEIGHT), # slow fractal
 ]
 vis = vis_list[vis_ctr]
 vis2 = None
