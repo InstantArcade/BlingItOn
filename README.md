@@ -2,6 +2,8 @@
 
 Welcome to the repository for our intermediate-level maker workshop, originally presented at the **[2025 Hackaday Superconference](https://hackaday.com/2025/09/23/2025-hackaday-superconference-announcing-our-workshops-and-tickets/)**! In this workshop, we explore the fundamentals of **generative algorithms** and apply them to create dynamic, data-driven visual art on a physical display. The repository is split into two separate implementation folders: one using **CircuitPython** and the other using **C++**. ˇ
 
+**[Join our discord!](https://discord.gg/dmBcJM6YX)**
+
 ## Hardware / Materials
 The case for the LED matrix was designed for this 64x64 matrix:
 * **Adafruit 64x64 RGB LED Matrix (2.0mm Pitch):** [Product Page (ID: 5362)](https://www.adafruit.com/product/5362)
