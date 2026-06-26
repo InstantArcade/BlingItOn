@@ -1,6 +1,6 @@
 # Programming Your Own Generative Art Matrix
 
-Welcome to the repository for our intermediate-level maker workshop! In this workshop, we explore the fundamentals of **generative algorithms** and apply them to create dynamic, data-driven visual art on a physical display. The repository is split into two separate implementation folders: one using **CircuitPython** and the other using **C++**.
+Welcome to the repository for our intermediate-level maker workshop, originally presented at the **[2025 Hackaday Superconference](https://hackaday.com/2025/09/23/2025-hackaday-superconference-announcing-our-workshops-and-tickets/)**! In this workshop, we explore the fundamentals of **generative algorithms** and apply them to create dynamic, data-driven visual art on a physical display. The repository is split into two separate implementation folders: one using **CircuitPython** and the other using **C++**. ˇ
 
 ## Hardware / Materials
 The case for the LED matrix was designed for this 64x64 matrix:
