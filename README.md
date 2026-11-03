@@ -9,8 +9,10 @@ The case for the LED matrix was designed for this 64x64 matrix:
 * **Adafruit 64x64 RGB LED Matrix (2.0mm Pitch):** [Product Page (ID: 5362)](https://www.adafruit.com/product/5362)
   * *Specs:* 130 mm x 130 mm dimensions, high-density RGB LEDs.
 * **Matrix Portal S3:** https://www.adafruit.com/product/5778
+* or **Pimoroni Interstate75W:** https://shop.pimoroni.com/en-us/products/interstate-75-w?variant=54977948713339
 
-*Note: Depending on your microcontroller choice (e.g., ESP32, Raspberry Pi Pico, MatrixPortal), make sure you have the appropriate logic level shifters or a dedicated driver shield/wing as recommended by Adafruit.*
+*Note: Depending on your microcontroller choice (e.g., ESP32, Raspberry Pi Pico), make sure you have the appropriate logic level shifters or a dedicated driver shield/wing as recommended by Adafruit. (MatrixPortal and Interstate 75W have these built in)*
+*Note: The MatrixPortal S3 has an onboard accelerometer, but for other boards, you'll need to add one for visualizations that use it. e.g. https://shop.pimoroni.com/en-us/products/adafruit-msa311-triple-axis-accelerometer-stemma-qt-qwiic?variant=39605361508435*
 
 ## Structure
 
@@ -22,7 +24,7 @@ The case for the LED matrix was designed for this 64x64 matrix:
 
 ## Optional CPP Enhancements
 If you decide to use this project with Arduino/C++, Marc MERLIN has made a driver
-for this CPU/Board/Display combo that allows you full framebuffer functionality 
+for this CPU/Board/Display combo (Matrixportal Board only) that allows you full framebuffer functionality 
 along with Adafruit GFX, FastLED, and LEDMatrix API support.
 
 Please refer to 
