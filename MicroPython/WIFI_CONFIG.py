@@ -1,0 +1,2 @@
+SSID = "SUPERCON"
+PASS = "HackingIsFun"
