@@ -12,14 +12,17 @@ The case for the LED matrix was designed for this 64x64 matrix:
 * or **Pimoroni Interstate75W:** https://shop.pimoroni.com/en-us/products/interstate-75-w?variant=54977948713339
 
 *Note: Depending on your microcontroller choice (e.g., ESP32, Raspberry Pi Pico), make sure you have the appropriate logic level shifters or a dedicated driver shield/wing as recommended by Adafruit. (MatrixPortal and Interstate 75W have these built in)*
+
 *Note: The MatrixPortal S3 has an onboard accelerometer, but for other boards, you'll need to add one for visualizations that use it. e.g. https://shop.pimoroni.com/en-us/products/adafruit-msa311-triple-axis-accelerometer-stemma-qt-qwiic?variant=39605361508435*
 
 ## Structure
 
 ```text
-├── CPP/    # C++ / Arduino implementation source files 
-└── CircuitPython/    # CircuitPython implementation scripts and libraries
-└── case/ svg file to laser cut the custom case
+├── CPP/    # C++ / Arduino implementation source files (Adafruit Matrix Portal S3 board only for now)
+└── CircuitPython/    # CircuitPython implementation scripts and libraries for the Adafruit Matrix Portal S3 board
+└── MicroPython/    # MicroPython implementation scripts and libraries for the Pimironi Interstate 75W board
+└── Case/    # svg and dxf files to laser cut the custom case
+└──Tools/i75    # uf2 files to install MicroPython on the i75 and a nuke file to clear the i75 flash if all goes wrong (you'll lose everything on the board)
 ```
 
 ## Optional CPP Enhancements
