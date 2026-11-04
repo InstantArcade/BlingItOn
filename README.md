@@ -25,6 +25,12 @@ The case for the LED matrix was designed for this 64x64 matrix:
 └──Tools/i75    # uf2 files to install MicroPython on the i75 and a nuke file to clear the i75 flash if all goes wrong (you'll lose everything on the board)
 ```
 
+## Tools
+For the Vector visualizer, you can load a shape from a list of verts.
+We've provided a simple vector shape editor here - https://instantarcade.github.io/ShapeEditor/
+Copy the vert data and paste it into a new python file inside the ```shapes``` folder, then import it by importing it with
+```from shapes import myshape``` and then use ```load_shape( myshape.verts )``` to load the shape (and remove/replace any existing verts)
+
 ## Optional CPP Enhancements
 If you decide to use this project with Arduino/C++, Marc MERLIN has made a driver
 for this CPU/Board/Display combo (Matrixportal Board only) that allows you full framebuffer functionality 
