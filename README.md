@@ -1,6 +1,6 @@
 # Programming Your Own Generative Art Matrix
 
-Welcome to the repository for our intermediate-level maker workshop, originally presented at the **[2025 Hackaday Superconference](https://hackaday.com/2025/09/23/2025-hackaday-superconference-announcing-our-workshops-and-tickets/)**! In this workshop, we explore the fundamentals of **generative algorithms** and apply them to create dynamic, data-driven visual art on a physical display. The repository is split into two separate implementation folders: one using **CircuitPython** and the other using **C++**. ˇ
+Welcome to the repository for our intermediate-level maker workshop, originally presented at the **[2025 Hackaday Superconference](https://hackaday.com/2025/09/23/2025-hackaday-superconference-announcing-our-workshops-and-tickets/)**! In this workshop, we explore the fundamentals of **generative algorithms** and apply them to create dynamic, data-driven visual art on a physical display. The repository is split into separate implementation folders: one using **CircuitPython** and and one using **C++** on the Adafruit Matrix Portal S3, and for 2026 an implementation in **MicroPython** on the Pimoroni Interstate 75W. ˇ
 
 **[Join our discord!](https://discord.gg/dmBcJM6YX)**
 
