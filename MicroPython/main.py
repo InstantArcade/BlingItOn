@@ -17,6 +17,7 @@ import urequests
 from machine import Timer
 
 # Preferences
+vis_switch_seconds = 30
 use_wifi = False
 show_time = False
 show_text = False
@@ -177,12 +178,18 @@ from BlinkenVis import BlinkenVis
 from ConcentricVis import ConcentricVis
 from ShapesVis import ShapesVis
 
-#vis = ShapesVis(WIDTH,HEIGHT)
-vis = VectorVis(WIDTH,HEIGHT)
-#vis = GridVis(WIDTH,HEIGHT)
-#vis = BlinkenVis(WIDTH,HEIGHT)
-#vis = ConcentricVis(WIDTH,HEIGHT)
-vis.reset()
+visualizations = [
+    ShapesVis(WIDTH,HEIGHT),
+    VectorVis(WIDTH,HEIGHT),
+    GridVis(WIDTH,HEIGHT),
+    BlinkenVis(WIDTH,HEIGHT),
+    ConcentricVis(WIDTH,HEIGHT),
+]
+for visualization in visualizations:
+    visualization.reset()
+vis_index = 0
+vis = visualizations[vis_index]
+vis_start = time.ticks_ms()
 
 # It's possible to layer 2 (or more) visualizations, but it's at the cost of performance
 vis2 = None
@@ -199,6 +206,10 @@ hue = 0
 
 while 1:
     tstart = time.ticks_ms()
+    if time.ticks_diff(tstart, vis_start) >= vis_switch_seconds * 1000:
+        vis_index = (vis_index + 1) % len(visualizations)
+        vis = visualizations[vis_index]
+        vis_start = tstart
     gc.collect()
     delta = (tstart-fps_start)/1000
     fps_start = tstart
