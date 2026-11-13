@@ -177,6 +177,7 @@ from GridVis import GridVis
 from BlinkenVis import BlinkenVis
 from ConcentricVis import ConcentricVis
 from ShapesVis import ShapesVis
+from RippleVis import RippleVis
 
 visualizations = [
     ShapesVis(WIDTH,HEIGHT),
@@ -184,6 +185,7 @@ visualizations = [
     GridVis(WIDTH,HEIGHT),
     BlinkenVis(WIDTH,HEIGHT),
     ConcentricVis(WIDTH,HEIGHT),
+    RippleVis(WIDTH,HEIGHT),
 ]
 for visualization in visualizations:
     visualization.reset()
