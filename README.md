@@ -31,7 +31,7 @@ We've provided a simple vector shape editor here - https://instantarcade.github.
 Copy the vert data and paste it into a new python file inside the ```shapes``` folder, then import it by importing it with
 ```from shapes import myshape``` and then use ```load_shape( myshape.verts )``` to load the shape (and remove/replace any existing verts)
 
-## Optional CPP Enhancements
+## Optional CPP Enhancements (Adafruit ESP32-S3 Matrixpanel Hardware from Supercon 2025)
 If you decide to use this project with Arduino/C++, Marc MERLIN has made a driver
 for this CPU/Board/Display combo (Matrixportal Board only) that allows you full framebuffer functionality 
 along with Adafruit GFX, FastLED, and LEDMatrix API support.
@@ -44,3 +44,13 @@ https://github.com/marcmerlin/FastLED_ESP32-HUB75-MatrixPanel_FrameBuffer_GFX
 Video demo:
 https://www.youtube.com/watch?v=1d6U-6twpCk
 <img width="1134" height="769" alt="image" src="https://github.com/user-attachments/assets/5e2faa48-15d8-42f1-b7e3-bc08be29c866" />
+
+## Optional CPP Enhancements (Interstate 75W RP2350 Hardware from Supercon 2026)
+Marc made a separate driver that offers the same exact API (allowing you to move your code back and forth with minimal effort between these 2 boards or any of the 10+ other supported hardware backends)
+
+Please refer to  
+https://github.com/marcmerlin/FastLED_Protomatter_RGBPanel_FrameBuffer_GFX
+
+<a href="https://youtu.be/iTXz6gqB7NY">
+<img width="1128" height="726" alt="image" src="https://github.com/user-attachments/assets/4b1dfe4a-6d7a-4e19-b637-9f860eb5f414" />
+</a>
